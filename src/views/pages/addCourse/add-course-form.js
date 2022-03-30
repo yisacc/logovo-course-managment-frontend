@@ -1,4 +1,7 @@
-import { Form, Input } from 'antd';
+import React from "react";
+import { Form } from 'antd';
+import FormInput from "../../components/form-input";
+import ReachTextEditor from "../../components/reach-text-editor";
 const AddCourseForm=({form})=>{
     return(
         <Form
@@ -6,12 +9,12 @@ const AddCourseForm=({form})=>{
             form={form}
             preserve={false}
         >
-            <Form.Item
-                name="name"
-                rules={[{ required: true, message: 'Please enter project name' }]}
-            >
-                <Input placeholder="Название курса" />
-            </Form.Item>
+            <FormInput
+                name={"name"}
+                message={'Please enter Название курса'}
+                placeholder={"Название курса"}
+            />
+            <ReachTextEditor />
         </Form>
     )
 }
