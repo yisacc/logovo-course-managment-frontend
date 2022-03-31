@@ -1,12 +1,45 @@
-import {Form} from "antd";
-import React from "react";
+import {Form, notification} from "antd";
+import React, {useState} from "react";
 import AddLessonForm from "./add-lesson-form";
 import SelectCourseCategory from "./select-course-category";
-import PageTitle from "../../components/page-title";
 import FormTitle from "../../components/form-title";
+import {useMutation} from "@apollo/client";
+import {CREATE_COURSE} from "../../../graphql/create-course";
+import {GET_COURSES} from "../../../graphql/get-courses";
+import {CREATE_LESSON} from "../../../graphql/create-lesson";
 
 const ManageAddLesson=()=>{
     const [form] = Form.useForm();
+    const [createLesson, { data, loading, error }] = useMutation(CREATE_LESSON);
+    const [value, setValue] = useState('');
+    const showSuccess = () => {
+        form.resetFields();
+        setValue('')
+        notification.success({
+            message: `Add Lesson`,
+            description: `Lesson Added Successfully.`
+        });
+    };
+    const showError = () => {
+        notification.error({
+            message: `Add Lesson`,
+            description: `unable to add lesson`
+        });
+    };
+    const addLesson=(values)=>{
+        createLesson({variables: {
+                name: values.name,
+                videoLink: values.videoLink,
+                description: value,
+                courseCategory: value.courseCategory,
+            }})
+            .then(response=>{
+                showSuccess();
+            })
+            .catch(error=>{
+                showError()
+            })
+    }
     return(
         <>
             <FormTitle title={"Добавить урок :"} />
@@ -15,7 +48,7 @@ const ManageAddLesson=()=>{
                 <SelectCourseCategory form={form} />
             </div>
             <div className="bg-light-cyan-blue p-8 m-[50px] rounded-3xl">
-            <AddLessonForm form={form} />
+            <AddLessonForm addLesson={addLesson} form={form} />
             </div>
         </>
     )

@@ -4,12 +4,13 @@ import FormInput from "../../components/form-input";
 import ReachTextEditor from "../../components/reach-text-editor";
 import VideoForm from "../../components/video-form";
 import FormButton from "../../components/submit-button";
-const AddLessonForm=({form})=>{
+const AddLessonForm=({form,addLesson,value,setValue,loading})=>{
     return(
         <Form
             layout={'vertical'}
             form={form}
             preserve={false}
+            OnFinish={addLesson}
         >
             <FormInput
                 name={"name"}
@@ -21,8 +22,8 @@ const AddLessonForm=({form})=>{
             message={'Please enter ЗЗагрузить Видео'}
             placeholder={"Загрузить Видео..."}
             />
-            <ReachTextEditor />
-            <FormButton name={"Добавить"} />
+            <ReachTextEditor value={value} setValue={setValue} />
+            <FormButton loading={loading} name={"Добавить"} />
         </Form>
     )
 }
