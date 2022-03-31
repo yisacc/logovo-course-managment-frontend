@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const ReachTextEditor=()=> {
-    const [value, setValue] = useState('');
+const ReachTextEditor=({value,setValue})=> {
     const modules = {
         toolbar: [
             [{ font: [] }],

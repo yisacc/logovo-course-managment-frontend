@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import React from "react";
 
-const FormButton=({name})=>{
+const FormButton=({name,loading})=>{
     return(
         <>
-            <Button className={"mt-5 text-dark-blue border-dark-blue"} shape="round" size={"large"}>{name}</Button>
+            <Button loading={loading} className={"mt-5 text-dark-blue border-dark-blue"} htmlType="submit" shape="round" size={"large"}>{name}</Button>
             </>
     )
 }
