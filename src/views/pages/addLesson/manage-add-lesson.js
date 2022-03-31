@@ -4,8 +4,6 @@ import AddLessonForm from "./add-lesson-form";
 import SelectCourseCategory from "./select-course-category";
 import FormTitle from "../../components/form-title";
 import {useMutation} from "@apollo/client";
-import {CREATE_COURSE} from "../../../graphql/create-course";
-import {GET_COURSES} from "../../../graphql/get-courses";
 import {CREATE_LESSON} from "../../../graphql/create-lesson";
 
 const ManageAddLesson=()=>{
@@ -27,16 +25,18 @@ const ManageAddLesson=()=>{
         });
     };
     const addLesson=(values)=>{
+        console.log(value)
         createLesson({variables: {
                 name: values.name,
                 videoLink: values.videoLink,
                 description: value,
-                courseCategory: value.courseCategory,
+                courseCategory: values.courseCategory,
             }})
             .then(response=>{
                 showSuccess();
             })
             .catch(error=>{
+                console.log(error)
                 showError()
             })
     }
@@ -48,7 +48,7 @@ const ManageAddLesson=()=>{
                 <SelectCourseCategory form={form} />
             </div>
             <div className="bg-light-cyan-blue p-8 m-[50px] rounded-3xl">
-            <AddLessonForm addLesson={addLesson} form={form} />
+            <AddLessonForm addLesson={addLesson} loading={loading} form={form} value={value} setValue={setValue} />
             </div>
         </>
     )

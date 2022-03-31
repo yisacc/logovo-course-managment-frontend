@@ -10,7 +10,7 @@ const AddLessonForm=({form,addLesson,value,setValue,loading})=>{
             layout={'vertical'}
             form={form}
             preserve={false}
-            OnFinish={addLesson}
+            onFinish={addLesson}
         >
             <FormInput
                 name={"name"}
