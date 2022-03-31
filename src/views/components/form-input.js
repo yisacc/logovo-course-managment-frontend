@@ -6,7 +6,7 @@ const FormInput=({name,message,placeholder})=>{
             name={name}
             rules={[{ required: true, message: `${placeholder}` }]}
         >
-            <Input size={"large"} placeholder={placeholder} />
+            <Input className={"p-2"} size={"large"} placeholder={placeholder} />
         </Form.Item>
     )
 }

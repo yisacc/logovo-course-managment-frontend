@@ -4,7 +4,7 @@ import FormInput from "../../components/form-input";
 import ReachTextEditor from "../../components/reach-text-editor";
 import VideoForm from "../../components/video-form";
 import FormButton from "../../components/submit-button";
-const AddCourseForm=({form})=>{
+const AddLessonForm=({form})=>{
     return(
         <Form
             layout={'vertical'}
@@ -13,17 +13,17 @@ const AddCourseForm=({form})=>{
         >
             <FormInput
                 name={"name"}
-                message={'Please enter Название курса'}
-                placeholder={"Название курса"}
+                message={'Please enter Название урока'}
+                placeholder={"Название урока"}
             />
             <VideoForm
             name={"videoLink"}
-            message={'Please enter Загрузить видео'}
-            placeholder={"Загрузить видео"}
+            message={'Please enter ЗЗагрузить Видео'}
+            placeholder={"Загрузить Видео..."}
             />
             <ReachTextEditor />
             <FormButton name={"Добавить"} />
         </Form>
     )
 }
-export default AddCourseForm
+export default AddLessonForm
