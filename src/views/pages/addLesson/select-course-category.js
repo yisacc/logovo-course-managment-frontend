@@ -1,12 +1,20 @@
 import {Form} from "antd";
-import FormInput from "../../components/form-input";
-import VideoForm from "../../components/video-form";
-import ReachTextEditor from "../../components/reach-text-editor";
-import FormButton from "../../components/submit-button";
 import React from "react";
 import FormSelect from "../../components/form-select";
+import {useQuery} from "@apollo/client";
+import {GET_COURSE_CATEGORIES_BY_PROJECT_ID} from "../../../graphql/get_coursecategories_by_id";
+import {useLocation} from "react-router";
 
 const SelectCourseCategory=({form})=>{
+    const location = useLocation();
+    const { courseId } = location.state;
+    const {
+        data,
+        loading,
+        error,
+    } = useQuery(GET_COURSE_CATEGORIES_BY_PROJECT_ID,
+        { variables: { courseId } }
+    );
     return(
         <Form
             layout={'vertical'}
@@ -17,6 +25,8 @@ const SelectCourseCategory=({form})=>{
                 name={"courseCategory"}
                 message={'Please enter Выбрать категорию '}
                 placeholder={"Выбрать категорию "}
+                data={data?.categoriesByCourseId}
+                loading={loading}
             />
 
         </Form>

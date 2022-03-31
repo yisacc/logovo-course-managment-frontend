@@ -1,6 +1,6 @@
 import {Form, Select} from "antd";
 
-const FormSelect=({placeholder,name,loading})=>{
+const FormSelect=({placeholder,name,loading,data})=>{
     return(
         <Form.Item
             name={name}
@@ -12,7 +12,13 @@ const FormSelect=({placeholder,name,loading})=>{
                 name={name}
                 placeholder={placeholder}
                 loading={loading}
-                options={[]}
+                options={data?.map((_, index) => {
+                        return {
+                            key: index,
+                            value: _._id,
+                            label: _.name
+                        };
+                    })}
             >
             </Select>
         </Form.Item>

@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
+import {useQuery} from "@apollo/client";
+import {GET_COURSES} from "../../graphql/get-courses";
+import {useEffect} from "react";
 const SideBar=()=>{
+    const { data, loading, error } = useQuery(GET_COURSES);
     return(
        <aside>
            <div className="overflow-y-auto py-16 bg-gray-50 rounded dark:bg-gray-800">
@@ -40,19 +44,24 @@ const SideBar=()=>{
                            </div>
                        </Link>
                    </li>
-                   <li className="px-4 bg-white rounded-full">
-                       <Link to="/add-lesson"
-                             className="grid grid-cols-2 gap-10 py-3 content-start text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                           <div>
-                               <span className="text-indigo ml-11">2D</span>
-                           </div>
-                           <div>
-                               <svg className="content-end" width="23" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                   <path d="M3.414 13.9708L13.556 3.82879L12.142 2.41479L2 12.5568V13.9708H3.414ZM4.243 15.9708H0V11.7278L11.435 0.292787C11.6225 0.105316 11.8768 0 12.142 0C12.4072 0 12.6615 0.105316 12.849 0.292787L15.678 3.12179C15.8655 3.30931 15.9708 3.56362 15.9708 3.82879C15.9708 4.09395 15.8655 4.34826 15.678 4.53579L4.243 15.9708ZM0 17.9708H18V19.9708H0V17.9708Z" fill="#4079C6"/>
-                               </svg>
-                           </div>
-                       </Link>
-                   </li>
+                   {data?.courses.map((course,index)=>{
+                       return(
+                       <li key={index} className="px-4 bg-white rounded-full">
+                           <Link to="/add-lesson" state={{courseId:course._id}}
+                                 className="grid grid-cols-2 gap-10 py-3 content-start text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                               <div>
+                                   <span className="text-indigo ml-11">{course.name}</span>
+                               </div>
+                               <div>
+                                   <svg className="content-end" width="23" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path d="M3.414 13.9708L13.556 3.82879L12.142 2.41479L2 12.5568V13.9708H3.414ZM4.243 15.9708H0V11.7278L11.435 0.292787C11.6225 0.105316 11.8768 0 12.142 0C12.4072 0 12.6615 0.105316 12.849 0.292787L15.678 3.12179C15.8655 3.30931 15.9708 3.56362 15.9708 3.82879C15.9708 4.09395 15.8655 4.34826 15.678 4.53579L4.243 15.9708ZM0 17.9708H18V19.9708H0V17.9708Z" fill="#4079C6"/>
+                                   </svg>
+                               </div>
+                           </Link>
+                       </li>
+                       )
+                   })}
+
                </ul>
            </div>
            </aside>

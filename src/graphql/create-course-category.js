@@ -1,14 +1,12 @@
 import {gql} from "@apollo/client";
 
-export const CREATE_COURSE = gql`
-  mutation createCourse($name: String!
-  $videoLink: String!
-  $description: String!
+export const CREATE_COURSE_CATEGORY = gql`
+  mutation createCourseCategory($name: String!
+  $course: String!
   ){
-  createCourse(createCourseInput:{
+  createCourseCategory(createCourseCategoryInput:{
     name:$name,
-    videoLink:$videoLink,
-    description:$description
+    course:$course,
   }){
     name
   }
